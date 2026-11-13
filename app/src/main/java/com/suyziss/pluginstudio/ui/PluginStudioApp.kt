@@ -84,7 +84,6 @@ fun PluginStudioApp() {
     var extension by remember { mutableStateOf(".plugin") }
     var projects by remember { mutableStateOf(ProjectStore.load(context)) }
     var showSaveDialog by remember { mutableStateOf(false) }
-    var showSavedMessage by remember { mutableStateOf(false) }
 
     fun saveProject(name: String) {
         val cleanName = name.trim()
@@ -94,7 +93,6 @@ fun PluginStudioApp() {
             projectName = cleanName
             showSaveDialog = false
             screen = Screen.PROJECTS
-            showSavedMessage = true
         }
     }
 
@@ -271,12 +269,5 @@ fun PluginStudioApp() {
                 TextButton(onClick = { showSaveDialog = false }) { Text("Отмена") }
             }
         )
-    }
-    if (showSavedMessage) {
-        LaunchedEffect(showSavedMessage) {
-            kotlinx.coroutines.delay(1800)
-            showSavedMessage = false
-        }
-        SnackbarHost(hostState = remember { SnackbarHostState() })
     }
 }
