@@ -1,155 +1,115 @@
 # Plugin Studio
 
-**Plugin Studio** is a mobile Android IDE for creating and editing plugins.  
-Created by **[@suyziss](https://github.com/suyziss)**.
+**Plugin Studio** is an Android-first workspace for creating and packaging plugins. Created by [@suyziss](https://github.com/suyziss).
 
-## ✨ Current Implementation
+## Current implementation
 
-- Kotlin, Jetpack Compose and Material 3 with system Dynamic Colors.
+- Kotlin, Jetpack Compose, Material 3 and Android Dynamic Colors.
 - Android 8.0+ (API 26), compileSdk 36.
-- Project creation with name, author, version, description, language and file extension.
-- Custom file extensions such as `.plugin`, `.myscript` and `.py`.
-- File extensions do not determine the programming language.
-- Basic editor screen and start panel.
-- Room, DataStore and Coroutines dependencies prepared.
-- Unit tests for extension rules.
-- GitHub Actions for tests, Android Lint and debug APK builds.
+- Focused code editor with monospace text, configurable font size and line-number gutter.
+- Automatic local draft recovery.
+- Undo and redo history for the current editing session.
+- Search and replace all.
+- Basic static checks for bracket balance, trailing spaces, TODO markers and common Python indentation mixing.
+- Starter templates for a plugin, Python, JavaScript and JSON manifest.
+- Project save, reopen, search and delete.
+- ZIP export containing the source file and a small README.
+- Text-file import through Android's document picker.
+- Settings for language, extension, font size and line numbers.
+- GitHub Actions for unit tests, Android Lint and debug APK builds.
 
-## 🛠 Build
+## Build
 
-Requirements: **JDK 17**, **Android SDK 36** and **Gradle 8.13**.
+Requirements: JDK 17, Android SDK 36 and Gradle 8.13.
 
 ```bash
 git clone https://github.com/suyziss/Suyziss-Plugin-Studio.git
 cd Suyziss-Plugin-Studio
-
 gradle testDebugUnitTest
 gradle lintDebug
 gradle assembleDebug
 ```
 
-After a successful build, the APK is located at:
+The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 
-`app/build/outputs/apk/debug/app-debug.apk`
+## Current limitations
 
-## 🤖 GitHub Actions
+This is an early-stage editor, not yet a full IDE:
+- The current editor is based on Compose BasicTextField; it does not yet provide full syntax highlighting, language-server completion, formatting engines or code execution.
+- Diagnostics are lightweight text checks, not compiler-grade validation.
+- Projects currently use local JSON-backed SharedPreferences storage. Room migration and a multi-file project tree are planned.
+- ZIP export currently packages the active source file and README; it is not yet a full multi-directory project archive.
+- Git integration, diff/history UI, advanced plugin manifest validation and language-specific tooling are not implemented yet.
+- Project data is stored locally on the device; there is no cloud sync.
 
-The `.github/workflows/android-build.yml` workflow runs on:
+## Roadmap
 
-- pushes to `main`;
-- Pull Requests;
-- manual GitHub Actions runs.
+1. Integrate a production-grade editor component with syntax highlighting, completion hooks, code folding and reliable line-number scrolling.
+2. Move project persistence to Room and introduce multi-file project trees, tabs and safe rename/delete operations.
+3. Add project metadata, manifest schemas, language-specific validators and configurable templates.
+4. Add version snapshots, diff viewer, backup/restore and document-tree access.
+5. Add Git support and optional local toolchains where Android permits.
+6. Add full RU/EN localization and accessibility polish.
 
-It performs:
+## GitHub Actions
 
-1. Unit tests.
-2. Android Lint.
-3. Debug APK build.
-4. Debug APK artifact upload.
-5. Build report preservation.
-
-The `.github/workflows/android-release.yml` workflow runs on `v*` tags. Until proper Gradle signing configuration is added, it does not publish an unsigned APK as a release.
-
-## 🚀 Roadmap
-
-- Full CodeMirror editor with locally bundled resources.
-- Line numbers, search and replace, tabs and formatting.
-- Complete project model and extension profiles in Room.
-- SAF import/export and directory selection.
-- Autosave.
-- Version history and backups.
-- Diff Viewer.
-- Template library.
-- Problems and Command Palette.
-- README Generator.
-- GitHub Device Flow.
-- RU/EN localization.
-- Theme settings.
-- **Future Windows and Linux versions.**
-
-## 📱 Status
-
-**Plugin Studio is actively developed.**
-
-The current version is an early implementation, not a finished IDE. Some planned features are still under development.
+The Android build workflow runs on pushes to `main`, pull requests and manual dispatch. It runs unit tests, Android Lint, builds a debug APK and uploads the APK artifact.
 
 ---
 
 # Русская версия
 
-**Plugin Studio** — мобильная Android IDE для создания и редактирования плагинов.  
-Автор: **[@suyziss](https://github.com/suyziss)**.
+**Plugin Studio** — Android-среда для создания, редактирования и упаковки плагинов. Автор: [@suyziss](https://github.com/suyziss).
 
-## ✨ Текущая реализация
+## Что уже реализовано
 
-- Kotlin, Jetpack Compose и Material 3 с системными Dynamic Colors.
+- Kotlin, Jetpack Compose, Material 3 и системные Dynamic Colors.
 - Android 8.0+ (API 26), compileSdk 36.
-- Создание проекта с названием, автором, версией, описанием, языком и расширением.
-- Произвольные расширения файлов: например `.plugin`, `.myscript`, `.py`.
-- Расширение файла не определяет язык программирования.
-- Базовый экран редактора и стартовая панель.
-- Подготовлены зависимости Room, DataStore и Coroutines.
-- Unit-тесты правил расширений.
-- GitHub Actions для тестов, Android Lint и сборки debug APK.
+- Редактор с моноширинным текстом, настраиваемым размером шрифта и колонкой номеров строк.
+- Автоматическое сохранение и восстановление локального черновика.
+- Отмена и повтор действий в рамках текущей сессии.
+- Поиск и замена всех совпадений.
+- Базовая статическая проверка баланса скобок, пробелов в конце строк, TODO и некоторых проблем с отступами Python.
+- Шаблоны плагина, Python, JavaScript и JSON-манифеста.
+- Сохранение, повторное открытие, поиск и удаление проектов.
+- Экспорт ZIP с исходным файлом и небольшим README.
+- Импорт текстовых файлов через системный выбор документов Android.
+- Настройки языка, расширения, размера шрифта и нумерации строк.
+- GitHub Actions для unit-тестов, Android Lint и сборки debug APK.
 
-## 🛠 Сборка
+## Сборка
 
-Требуется **JDK 17**, **Android SDK 36** и **Gradle 8.13**.
+Требуются JDK 17, Android SDK 36 и Gradle 8.13.
 
 ```bash
 git clone https://github.com/suyziss/Suyziss-Plugin-Studio.git
 cd Suyziss-Plugin-Studio
-
 gradle testDebugUnitTest
 gradle lintDebug
 gradle assembleDebug
 ```
 
-После успешной сборки APK находится здесь:
+Debug APK создаётся в `app/build/outputs/apk/debug/app-debug.apk`.
 
-`app/build/outputs/apk/debug/app-debug.apk`
+## Текущие ограничения
 
-## 🤖 GitHub Actions
+Это ранняя версия редактора, а не полноценная IDE:
+- Редактор пока основан на Compose BasicTextField. Полноценной подсветки синтаксиса, автодополнения через language server, форматтеров и запуска кода пока нет.
+- Диагностика выполняет простые текстовые проверки, а не полноценную компиляцию.
+- Проекты пока хранятся в локальном JSON внутри SharedPreferences. Переход на Room и дерево многофайловых проектов запланированы.
+- ZIP содержит активный исходный файл и README, но пока не архивирует полноценную структуру каталогов.
+- Git, просмотр diff и истории версий, расширенная проверка манифестов и языковые инструменты пока не реализованы.
+- Данные хранятся локально; облачной синхронизации нет.
 
-Workflow `.github/workflows/android-build.yml` запускается при:
+## План развития
 
-- push в `main`;
-- создании Pull Request;
-- ручном запуске через GitHub Actions.
+1. Подключить полноценный редактор с подсветкой синтаксиса, автодополнением, сворачиванием блоков и синхронной прокруткой номеров строк.
+2. Перевести хранение проектов на Room, добавить дерево файлов и вкладки.
+3. Добавить метаданные проектов, схемы манифестов, языковые валидаторы и настраиваемые шаблоны.
+4. Реализовать снимки версий, diff, резервное копирование и восстановление.
+5. Добавить Git и поддерживаемые локальные инструменты разработки.
+6. Завершить локализацию RU/EN и улучшить доступность интерфейса.
 
-Workflow выполняет:
+## GitHub Actions
 
-1. Unit-тесты.
-2. Android Lint.
-3. Сборку debug APK.
-4. Загрузку APK как GitHub Actions Artifact.
-5. Сохранение build reports.
-
-Workflow `.github/workflows/android-release.yml` запускается по тегам `v*`. Пока в Gradle не добавлена полноценная signing-конфигурация, workflow не публикует неподписанный APK как релиз.
-
-## 🚀 План развития
-
-- Полноценный редактор CodeMirror с локально встроенными ресурсами.
-- Нумерация строк, поиск и замена, вкладки и форматирование.
-- Полная модель проектов и профили расширений в Room.
-- SAF import/export и выбор каталога.
-- Автосохранение.
-- История версий и резервные копии.
-- Diff Viewer.
-- Библиотека шаблонов.
-- Problems и Command Palette.
-- README Generator.
-- GitHub Device Flow.
-- Локализация RU/EN.
-- Настройки темы.
-- **В будущем планируется версия для Windows и Linux.**
-
-## 📱 Статус
-
-**Проект находится в активной разработке.**
-
-Текущая версия является начальной реализацией Plugin Studio, а не завершённой IDE. Часть запланированных функций ещё находится в разработке.
-
-## 📄 Лицензия
-
-Лицензия будет добавлена в отдельном обновлении репозитория.
+Workflow сборки Android запускается при push в `main`, создании Pull Request и ручном запуске. Он выполняет unit-тесты, Android Lint, сборку debug APK и загрузку APK как artifact.
