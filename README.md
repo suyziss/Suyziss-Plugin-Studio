@@ -3,7 +3,7 @@
 **Plugin Studio** — мобильная Android IDE для создания и редактирования плагинов.  
 Автор: **[@suyziss](https://github.com/suyziss)**.
 
-## Текущая реализация
+## ✨ Текущая реализация
 
 - Kotlin, Jetpack Compose и Material 3 с системными Dynamic Colors.
 - Android 8.0+ (API 26), compileSdk 36.
@@ -13,39 +13,65 @@
 - Базовый экран редактора и стартовая панель.
 - Подготовлены зависимости Room, DataStore и Coroutines.
 - Unit-тесты правил расширений.
-- GitHub Actions workflow для тестов, lint и debug APK artifact.
+- GitHub Actions для тестов, Android Lint и сборки debug APK.
 
-## Сборка
+## 🛠 Сборка
 
-Требуется JDK 17, Android SDK 36 и Gradle 8.13.
+Требуется **JDK 17**, **Android SDK 36** и **Gradle 8.13**.
 
 ```bash
 git clone https://github.com/suyziss/Suyziss-Plugin-Studio.git
 cd Suyziss-Plugin-Studio
+
 gradle testDebugUnitTest
 gradle lintDebug
 gradle assembleDebug
 ```
 
-APK после сборки: `app/build/outputs/apk/debug/app-debug.apk`.
+После успешной сборки APK находится здесь:
 
-## GitHub Actions
+`app/build/outputs/apk/debug/app-debug.apk`
 
-Workflow `.github/workflows/android-build.yml` запускается при push в `main`, Pull Request и вручную. Он выполняет unit-тесты, Android Lint, собирает debug APK и загружает APK как Actions Artifact.
+## 🤖 GitHub Actions
 
-Workflow `.github/workflows/android-release.yml` запускается по тегам `v*`. Пока в Gradle не добавлена реальная signing-конфигурация, workflow не публикует неподписанный APK как релиз.
+Workflow `.github/workflows/android-build.yml` запускается при:
 
-## План следующих этапов
+- push в `main`;
+- создании Pull Request;
+- ручном запуске через GitHub Actions.
+
+Workflow выполняет:
+
+1. Unit-тесты.
+2. Android Lint.
+3. Сборку debug APK.
+4. Загрузку APK как GitHub Actions Artifact.
+5. Сохранение build reports.
+
+Workflow `.github/workflows/android-release.yml` запускается по тегам `v*`. Пока в Gradle не добавлена полноценная signing-конфигурация, workflow не публикует неподписанный APK как релиз.
+
+## 🚀 План развития
 
 - Полноценный редактор CodeMirror с локально встроенными ресурсами.
-- Нумерация строк, поиск/замена, вкладки и форматирование.
+- Нумерация строк, поиск и замена, вкладки и форматирование.
 - Полная модель проектов и профили расширений в Room.
 - SAF import/export и выбор каталога.
-- Автосохранение, история версий, резервные копии и Diff Viewer.
-- Библиотека шаблонов, Problems и Command Palette.
-- README generator и GitHub Device Flow.
-- Локализация RU/EN и настройки темы.
+- Автосохранение.
+- История версий и резервные копии.
+- Diff Viewer.
+- Библиотека шаблонов.
+- Problems и Command Palette.
+- README Generator.
+- GitHub Device Flow.
+- Локализация RU/EN.
+- Настройки темы.
 
-## Статус
+## 📱 Статус
 
-Это начальная версия репозитория, а не завершённая IDE. Сборка на реальном устройстве и эмуляторе пока не подтверждена. Не все перечисленные в первоначальном ТЗ функции реализованы.
+**Проект находится в активной разработке.**
+
+Текущая версия является начальной реализацией Plugin Studio, а не завершённой IDE. Сборка на реальном устройстве и эмуляторе пока не подтверждена, поэтому часть запланированных функций ещё находится в разработке.
+
+## 📄 Лицензия
+
+Лицензия будет добавлена в отдельном обновлении репозитория.
